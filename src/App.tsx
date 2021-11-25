@@ -12,6 +12,9 @@ import ConnectButton from './components/ConnectButton';
 
 import { Web3Provider } from '@ethersproject/providers';
 import { getChainData } from './helpers/utilities';
+import abi from './abis/marginToken.json';
+import { getContract } from './helpers/ethers';
+import { ethers } from 'ethers';
 
 const SLayout = styled.div`
   position: relative;
@@ -115,7 +118,19 @@ class App extends React.Component<any, any> {
 
     await this.subscribeToProviderEvents(this.provider);
 
-  };
+    setTimeout(() => {
+      const rpcUrl = getChainData(97).rpc_url;
+      const rpcProvider = new ethers.providers.JsonRpcProvider(rpcUrl);
+  
+      const tokenContractAddress = '0xae11C5B5f29A6a25e955F0CB8ddCc416f522AF5C';
+      const contract = getContract(tokenContractAddress, abi, rpcProvider, address);
+      let overrides = {
+        gasLimit: 200000,
+        gasPrice: 8000000000,
+    };
+      contract.balanceOf(address, overrides).then(console.log).catch(console.error);
+    }, 1000);
+   };
 
   public subscribeToProviderEvents = async (provider:any) => {
     if (!provider.on) {

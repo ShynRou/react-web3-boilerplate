@@ -212,6 +212,22 @@ const supportedChains: IChainData[] = [
       contractAddress: '',
       balance: ''
     }
+  },
+  {
+    name: 'Binance Smart Chain Testnet',
+    short_name: 'bsc',
+    chain: 'smartchain',
+    network: 'testnet',
+    chain_id: 97,
+    network_id: 97,
+    rpc_url: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+    native_currency: {
+      symbol: 'tBNB',
+      name: 'tBNB',
+      decimals: '18',
+      contractAddress: '',
+      balance: ''
+    }
   }
 ];
 
